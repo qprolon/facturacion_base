@@ -25,6 +25,7 @@ class contabilidad_impuestos extends fbase_controller
     public $codsubcuentasop;
     public $codsubcuentarep;
     public $impuesto;
+    public $prueba;
 
     public function __construct()
     {
