@@ -432,6 +432,7 @@ class informe_contabilidad extends fs_controller
                         /// añadimos la cuenta
                         if ($debe != 0 || $haber != 0) {
                             //$cuenta = $cuenta0->get_by_codigo($i . $j . $k, $eje->codejercicio);
+                            //CAMBIE A SUBCUENTA XQ NO MUESTRAN LAS DESCRIPCIONTES
                              $cuenta = $subcuenta0->get_by_codigo($d['codsubcuenta'], $eje->codejercicio);
                             if ($cuenta) {
                                 $lineas[] = array(
