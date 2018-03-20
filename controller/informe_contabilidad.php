@@ -288,8 +288,8 @@ class informe_contabilidad extends fs_controller
                     echo "cuenta;descripcion;debe;haber;deudor;acreedor\n";
 
                     $pdf_doc = FALSE;
-                    if ($_POST['tipo'] == '3') {
-                        $this->sumas_y_saldos($pdf_doc, $eje, 3, 'de ' . $_POST['desde'] . ' a ' . $_POST['hasta'], $_POST['desde'], $_POST['hasta'], $excluir);
+                    if ($_POST['tipo'] == '4') {
+                        $this->sumas_y_saldos($pdf_doc, $eje, 4, 'de ' . $_POST['desde'] . ' a ' . $_POST['hasta'], $_POST['desde'], $_POST['hasta'], $excluir);
                     } else {
                         $this->sumas_y_saldos($pdf_doc, $eje, 10, 'de ' . $_POST['desde'] . ' a ' . $_POST['hasta'], $_POST['desde'], $_POST['hasta'], $excluir);
                     }
@@ -300,8 +300,8 @@ class informe_contabilidad extends fs_controller
                     $pdf_doc->pdf->addInfo('Author', fs_fix_html($this->empresa->nombre));
                     $pdf_doc->pdf->ezStartPageNumbers(580, 10, 10, 'left', '{PAGENUM} de {TOTALPAGENUM}');
 
-                    if ($_POST['tipo'] == '3') {
-                        $this->sumas_y_saldos($pdf_doc, $eje, 3, 'de ' . $_POST['desde'] . ' a ' . $_POST['hasta'], $_POST['desde'], $_POST['hasta'], $excluir);
+                    if ($_POST['tipo'] == '4') {
+                        $this->sumas_y_saldos($pdf_doc, $eje, 4, 'de ' . $_POST['desde'] . ' a ' . $_POST['hasta'], $_POST['desde'], $_POST['hasta'], $excluir);
                     } else {
                         $this->sumas_y_saldos($pdf_doc, $eje, 10, 'de ' . $_POST['desde'] . ' a ' . $_POST['hasta'], $_POST['desde'], $_POST['hasta'], $excluir);
                     }
@@ -324,7 +324,7 @@ class informe_contabilidad extends fs_controller
      */
     
     //ESTA FUNCION TAMBIEN LO CAMBIE LA CONSULTA
-    public function sumas_y_saldos(&$pdf_doc, &$eje, $tipo = 3, $titulo, $fechaini, $fechafin, $excluir = FALSE)
+    public function sumas_y_saldos(&$pdf_doc, &$eje, $tipo = 4, $titulo, $fechaini, $fechafin, $excluir = FALSE)
     {
         $ge0 = new grupo_epigrafes();
         $epi0 = new epigrafe();
@@ -431,7 +431,8 @@ class informe_contabilidad extends fs_controller
 
                         /// añadimos la cuenta
                         if ($debe != 0 || $haber != 0) {
-                            $cuenta = $cuenta0->get_by_codigo($i . $j . $k, $eje->codejercicio);
+                            //$cuenta = $cuenta0->get_by_codigo($i . $j . $k, $eje->codejercicio);
+                             $cuenta = $subcuenta0->get_by_codigo($d['codsubcuenta'], $eje->codejercicio);
                             if ($cuenta) {
                                 $lineas[] = array(
                                     'cuenta' => $i . $j . $k,
