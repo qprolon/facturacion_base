@@ -421,7 +421,7 @@ class informe_contabilidad extends fs_controller
                         $deudor = 0;
                         $acreedor = 0;
                         foreach ($data as $d) {
-                            if (substr($d['codsubcuenta'], 0, 3) == (string) $i . $j . $k) {
+                            if (substr($d['codsubcuenta'], 0, 3) == (string) $i . $j . $k ) {
                                 $debe += floatval($d['debe']);
                                 $haber += floatval($d['haber']);
                                 $deudor += floatval($d['deudor']);
@@ -431,12 +431,12 @@ class informe_contabilidad extends fs_controller
 
                         /// añadimos la cuenta
                         if ($debe != 0 || $haber != 0) {
-                            //$cuenta = $cuenta0->get_by_codigo($i . $j . $k, $eje->codejercicio);
+                            $cuenta = $cuenta0->get_by_codigo($i . $j . $k . $k, $eje->codejercicio);
                             //CAMBIE A SUBCUENTA XQ NO MUESTRAN LAS DESCRIPCIONTES
-                             $cuenta = $subcuenta0->get_by_codigo($d['codsubcuenta'], $eje->codejercicio);
+                            // $cuenta = $subcuenta0->get_by_codigo($i . $j . $k . $k, $eje->codejercicio);
                             if ($cuenta) {
                                 $lineas[] = array(
-                                    'cuenta' => $i . $j . $k,
+                                    'cuenta' => $i . $j . $k . $k,
                                     'descripcion' => $cuenta->descripcion,
                                     'debe' => $debe,
                                     'haber' => $haber,
@@ -445,7 +445,7 @@ class informe_contabilidad extends fs_controller
                                 );
                             } else {
                                 $lineas[] = array(
-                                    'cuenta' => $i . $j . $k,
+                                    'cuenta' => $i . $j . $k . $k,
                                     'descripcion' => '-',
                                     'debe' => $debe,
                                     'haber' => $haber,
