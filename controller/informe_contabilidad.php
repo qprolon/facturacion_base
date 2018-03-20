@@ -334,8 +334,8 @@ class informe_contabilidad extends fs_controller
         $lineas = array();
 
         $sql = "SELECT p.codsubcuenta, SUM(p.debe) as debe, SUM(p.haber) as haber, "
-           . "CASE WHEN (p.debe-p.haber) > 0 THEN  (p.debe-p.haber) ELSE 0 END deudor,
-            CASE WHEN (p.debe-p.haber) < 0 THEN  (p.debe-p.haber)*-1 ELSE 0 END acreedor" .
+           . "CASE WHEN (SUM(p.debe)-SUM(p.haber)) > 0 THEN  (SUM(p.debe)-SUM(p.haber)) ELSE 0 END deudor,
+            CASE WHEN (SUM(p.debe)-SUM(p.haber)) < 0 THEN  (SUM(p.debe)-SUM(p.haber))*-1 ELSE 0 END acreedor" .
             " FROM co_partidas p, co_asientos a WHERE p.idasiento = a.idasiento" .
             " AND a.codejercicio = " . $this->empresa->var2str($eje->codejercicio) .
             " AND a.fecha >= " . $this->empresa->var2str($fechaini) .
