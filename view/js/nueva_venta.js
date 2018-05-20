@@ -569,8 +569,11 @@ function aux_all_impuestos(num, codimpuesto)
     return html;
 }
 
-function add_articulo(ref, desc, pvp, dto, codimpuesto, cantidad, codcombinacion, dto2 = 0, dto3 = 0, dto4 = 0)
+function add_articulo(ref, desc, pvp, dto, codimpuesto, cantidad, codcombinacion)
 {
+    dto2 = 0;
+    dto3 = 0;
+    dto4 = 0;
     if (typeof codcombinacion == 'undefined') {
         codcombinacion = '';
     }
